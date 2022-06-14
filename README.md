@@ -31,11 +31,16 @@ We extract XLLs according to config rules, traversing each rule to determine whe
 | codedrinker/community | 7795 | 6376 | 1419 | 18.20% | 97 | 15651 | 506 | 61 |
 
 The running time in most of the cases is under 1 min, while still the total time of XLL extraction on several repos is high, namely *jeecg* and *mall*, reaching 237s and 300s respectively.
+
 More speccifically, the parsing time is the major overhead in XLL extraction, while the matching time usually takes up a small proportion of less than 20%, at an average of 13.45%. The matching time is mostly under 10s, which means that the performance of the matching algorithm is satisfying.
+
 We can notice that the repos on which the time consumption of XLL extraction is much higher than the others have large number of files and large LOC. Since the size of the source code may increase the parsing time greatly, it is par for the course.
+
 Also, we can see relevance between the matching time and the number of the detected XLLs of the repos.
 <div align=center><img src="img/matchingTime-detectedXLLs.png" width=600px /></div>
 
 As the above graph shows, the more XLLs are detected, there is more possibility that the matching time can be high.
+
 The number of config rules also shows an impact on the performance of XLL matching. The number of config rules for the three frameworks is respectively 11, 44 and 61(Android < SpringMVC < Mybatis). Except for the repo *NewPipe* with much more detected XLLs than the other ones, SpringMVC repos need more matching time than Android repos at average. And Mybatis repos need more matching time than SpringMVC repos when they have nearly the same number of detected XLLs.
+
 In conclusion, the number of files, LOC, detected XLLs and config rules together affect the running time of XLL extraction.
